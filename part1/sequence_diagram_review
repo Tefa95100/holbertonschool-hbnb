@@ -1,0 +1,21 @@
+sequenceDiagram
+
+# Create a review
+User->>API: POST Create a review (username, review, place, date)
+API->>BusinessLogic : Validate review (length of the reviewing text)
+BusinessLogic-->>API: Validate / Refuse
+API->>BusinessLogic : Validate date (not a date in the future)
+BusinessLogic-->>API: Validate / Refuse
+API->>BusinessLogic : Check if review exist
+BusinessLogic->>Database : Query review existence (same place same date)
+Database-->>BusinessLogic: Review not found
+BusinessLogic->>Database : Create a new review 
+Database-->>BusinessLogic: Sucess
+BusinessLogic-->>API: Review Created (ID: 123)
+API-->>User: 201 Review created waiting for validation (reviewID: 123)
+User->>API : POST Admin User validate review (reviewID: 123, validate)
+API->>BusinessLogic : Validate review
+BusinessLogic->>Database : Update the review as "validated" 
+Database-->>BusinessLogic: Sucess
+BusinessLogic-->>API: Review Validated (ID: 123)
+API-->>User: 200 Review validated with sucess (reviewID: 123)

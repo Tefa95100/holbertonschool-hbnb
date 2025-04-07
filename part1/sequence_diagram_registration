@@ -1,0 +1,19 @@
+sequenceDiagram
+
+# Register a user
+User->>API: POST Register a user (email, password, first_name, last_name)
+API->>BusinessLogic: Validate email format
+BusinessLogic-->>API: Validate
+API->>BusinessLogic: Validate password format
+BusinessLogic-->>API: Validate
+API->>BusinessLogic: Validate first name format
+BusinessLogic-->>API: Validate
+API->>BusinessLogic: Validate last name format
+BusinessLogic-->>API: Validate
+API->>BusinessLogic: Check if email exists
+BusinessLogic->>Database: Query email existence
+Database-->>BusinessLogic: Email not found
+BusinessLogic->>Database: Insert new user
+Database-->>BusinessLogic: Success
+BusinessLogic-->>API: User Created (ID: 123)
+API-->>User: 201 Created (userID: 123)

@@ -1,0 +1,11 @@
+sequenceDiagram
+
+# Fetching  a place
+User->>API: GET /place Search a place (criteria)
+API->>BusinessLogic : Validate search (criteria more than 0)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Check if places with criteria exist
+BusinessLogic->>Database : Fetch list of place
+Database-->>BusinessLogic: List of place found (ID : 123,456,789)
+BusinessLogic-->>API: Success List of place found (ID : 123,456,789)
+API-->>User: 200 : List of place found (ID : 123,456,789)

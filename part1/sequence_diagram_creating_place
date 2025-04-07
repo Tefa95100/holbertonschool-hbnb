@@ -1,0 +1,29 @@
+sequenceDiagram
+
+# Load available amenities
+User->>API: GET /amenities
+API->>BusinessLogic: List amenities
+BusinessLogic->>Database: Retrieve all amenities
+Database-->>BusinessLogic: Return amenities list
+BusinessLogic-->>API: Send amenities list
+API-->>User: Display amenities list
+
+# Create a place
+User->>API: POST /place Create a place (title, description, price, latitude, longitude, list[amenities])
+API->>BusinessLogic : Validate title (length of the title text)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Validate description (length of description text)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Validate price (price > 0)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Validate latitude (range -90 to +90)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Validate longitude (range -180 to +180)
+BusinessLogic-->>API: Validate
+API->>BusinessLogic : Check if place exist
+BusinessLogic->>Database : Query place existence
+Database-->>BusinessLogic: Place not found
+BusinessLogic->>Database: Insert new place (ID: 123)
+Database-->BusinessLogic: Success (ID: 123)
+BusinessLogic-->>API: Success (ID: 123)
+API-->>User: 201 : Place created successfully (ID: 123)

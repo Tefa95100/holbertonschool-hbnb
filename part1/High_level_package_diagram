@@ -1,0 +1,42 @@
+classDiagram
+    namespace PresentationLayer {
+        class APIController {
+            +handleRequests()
+            +formatResponses()
+            +validateInput()
+        }
+        class FacadeService {
+            +processRequest()
+            +handleErrors()
+            +authenticate()
+        }
+    }
+
+    namespace BusinessLogicLayer {
+        class EntityModels {
+            +User
+            +Place
+            +Review
+            +Amenity
+        }
+        class BusinessServices {
+            +validateData()
+            +applyBusinessRules()
+            +processOperations()
+        }
+        
+    }
+
+    namespace PersistenceLayer {
+        class Database {
+            +create()
+            +read()
+            +update()
+            +delete()
+        }
+    }
+
+    APIController --> FacadeService : uses
+    FacadeService --> BusinessServices : delegates
+    BusinessServices --> EntityModels : manages
+    BusinessServices -->  Database : accesses
