@@ -16,7 +16,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #ff5733;
     color: #fff;
     padding: 1rem;
 }
@@ -29,4 +29,41 @@ nav a {
 
 main {
     padding: 2rem;
+}
+
+section {}
+
+footer {}
+
+.details-button {
+    color: white;
+    background-color: #ff5733;
+    text-decoration: none;
+    margin: 10px;
+    position: relative;
+    top: 5px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.details-button:hover {
+    color: blue;
+}
+
+.place-card, .review-card {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+#places-list ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
