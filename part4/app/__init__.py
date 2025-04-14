@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restx import Api
+from flask_cors import CORS
 from app.api.v1.users import api as users_ns
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.reviews import api as reviews_ns, places_reviews_ns
@@ -37,5 +38,8 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     # initialize db
     db.init_app(app)
+
+    # initialize cors
+    CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type", "Authorization"])
 
     return app
